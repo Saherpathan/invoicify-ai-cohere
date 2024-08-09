@@ -1,1 +1,8 @@
-Flask==3.0.3
+cohere
+pdfplumber
+pytesseract
+pillow
+flask
+python-dotenv
+tailwindcss
+
