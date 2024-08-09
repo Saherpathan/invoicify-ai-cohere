@@ -6,7 +6,6 @@ import os
 import json
 import re
 from PIL import Image
-import pytesseract
 from werkzeug.utils import secure_filename
 
 # Load environment variables from .env file
@@ -27,7 +26,8 @@ os.makedirs(app.config['OUTPUT_FOLDER'], exist_ok=True)
 # Cohere API key
 cohere_api_key = os.getenv('COHERE_API_KEY')
 
-pytesseract.pytesseract.tesseract_cmd = "C:/Program Files/Tesseract-OCR/tesseract.exe"
+import pytesseract
+pytesseract.pytesseract.tesseract_cmd = r"C:/Program Files/Tesseract-OCR/tesseract.exe"
 
 # Function to extract text from PDF using pdfplumber
 def extract_text_from_pdf(pdf_file):
