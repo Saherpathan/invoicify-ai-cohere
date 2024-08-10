@@ -18,15 +18,17 @@ app = Flask(__name__)
 
 # Set up directories for file storage
 if os.getenv('ENV') == 'production':  # Assuming 'production' for Vercel
-    app.config['UPLOAD_FOLDER'] = '/tmp/uploads'
-    app.config['OUTPUT_FOLDER'] = '/tmp/output'
+    app.config['UPLOAD_FOLDER'] = None
+    app.config['OUTPUT_FOLDER'] = None
 else:
     app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), '../uploads')
     app.config['OUTPUT_FOLDER'] = os.path.join(os.path.dirname(__file__), '../output')
 
-# Ensure the directories exist
-os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-os.makedirs(app.config['OUTPUT_FOLDER'], exist_ok=True)
+# Ensure the directories exist if running locally
+if app.config['UPLOAD_FOLDER']:
+    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+if app.config['OUTPUT_FOLDER']:
+    os.makedirs(app.config['OUTPUT_FOLDER'], exist_ok=True)
 
 # Cohere API key
 cohere_api_key = os.getenv('COHERE_API_KEY')
@@ -145,11 +147,12 @@ def format_json_as_text(json_data):
 
     return formatted_text
 
-# Function to save JSON result to file
+# Function to save JSON result to file (only if running locally)
 def save_json_to_file(json_data, filename):
-    output_path = os.path.join(app.config['OUTPUT_FOLDER'], filename)
-    with open(output_path, 'w') as json_file:
-        json.dump(json_data, json_file, indent=4)
+    if app.config['OUTPUT_FOLDER']:
+        output_path = os.path.join(app.config['OUTPUT_FOLDER'], filename)
+        with open(output_path, 'w') as json_file:
+            json.dump(json_data, json_file, indent=4)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -157,8 +160,13 @@ def index():
         file = request.files['file']
         if file and (file.filename.endswith('.pdf') or file.filename.endswith(('.png', '.jpg', '.jpeg'))):
             filename = secure_filename(file.filename)
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(file_path)
+
+            # Save file only if running locally
+            if app.config['UPLOAD_FOLDER']:
+                file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                file.save(file_path)
+            else:
+                file_path = io.BytesIO(file.read())  # Handle file in-memory for Vercel
 
             if filename.endswith('.pdf'):
                 extracted_text = extract_text_from_pdf(file_path)
@@ -169,8 +177,9 @@ def index():
             extracted_details = extract_invoice_details_with_cohere(extracted_text, cohere_api_key)
             formatted_text = format_json_as_text(extracted_details)
 
-            # Save the JSON result
-            save_json_to_file(extracted_details, f"{filename.split('.')[0]}.json")
+            # Save the JSON result (only if running locally)
+            if app.config['OUTPUT_FOLDER']:
+                save_json_to_file(extracted_details, f"{filename.split('.')[0]}.json")
 
             return render_template('result.html', details=formatted_text)
     return render_template('index.html')
