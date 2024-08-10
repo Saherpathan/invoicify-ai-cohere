@@ -1,28 +1,132 @@
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fflask3&demo-title=Flask%203%20%2B%20Vercel&demo-description=Use%20Flask%203%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2Fflask3-python-template.vercel.app%2F&demo-image=https://assets.vercel.com/image/upload/v1669994156/random/flask.png)
+# Invoicify-AI-Cohere
 
-# Flask + Vercel
+A Flask application that extracts invoice details from uploaded PDFs and images using `pdfplumber`, `pytesseract`, and the Cohere API for natural language processing. The extracted data is displayed in a user-friendly format and can be downloaded as JSON.
 
-This example shows how to use Flask 3 on Vercel with Serverless Functions using the [Python Runtime](https://vercel.com/docs/concepts/functions/serverless-functions/runtimes/python).
+## Features
 
-## Demo
+- **Upload PDF or Image Files**: Supports PDFs and images in PNG, JPG, JPEG formats.
+- **AI-Powered Extraction**: Utilizes Cohere API to extract invoice details such as customer information, product details, and total amount.
+- **User-Friendly Interface**: Simple and intuitive UI for uploading files and viewing results.
+- **Downloadable JSON**: Extracted data can be downloaded as a JSON file.
+- **Deployment Support**: Ready for deployment on Vercel.
 
-https://flask-python-template.vercel.app/
+## Getting Started
 
-## How it Works
+### Prerequisites
 
-This example uses the Web Server Gateway Interface (WSGI) with Flask to enable handling requests on Vercel with Serverless Functions.
+- Python 3.8+
+- `pip` (Python package installer)
+- [Cohere API key](https://cohere.ai/) (Add this to a `.env` file)
 
-## Running Locally
+### Installation
+
+1. **Clone the Repository**
+
+    ```bash
+    git clone https://github.com/Saherpathan/invoicify-ai-cohere.git
+    cd invoicify-ai-cohere
+    ```
+
+2. **Create a Virtual Environment and Activate It**
+
+    ```bash
+    python -m venv venv
+    source venv/bin/activate   # On Windows use `venv\Scripts\activate`
+    ```
+
+3. **Install the Required Dependencies**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4. **Set Up Environment Variables**
+
+   Create a `.env` file in the root directory and add your Cohere API key:
+
+    ```env
+    COHERE_API_KEY=<your_cohere_api_key>
+    ```
+
+5. **Run the Flask Application Locally**
+
+    ```bash
+    python api_call.py
+    ```
+
+    The app will be accessible at [http://127.0.0.1:5000](http://127.0.0.1:5000).
+
+## Deployment
+
+### Deploying to Vercel
+
+1. **Install Vercel CLI**
+
+    ```bash
+    npm install -g vercel
+    ```
+
+2. **Deploy Your Application**
+
+    ```bash
+    vercel
+    ```
+
+   Follow the prompts to deploy. Vercel will provide you with a URL where your app is live.
+
+### Environment Setup on Vercel
+
+When deploying to Vercel, make sure to set the `COHERE_API_KEY` in the Environment Variables settings on the Vercel dashboard.
+
+## Folder Structure
 
 ```bash
-npm i -g vercel
-vercel dev
+invoicify-ai-cohere/
+│           
+├── requirements.txt        # Python dependencies
+├── vercel.json             # Vercel deployment configuration
+├── .env                    # Environment variables 
+├── /api                    # Main Flask application script
+│   ├── /output             # JSON outputs of extracted details
+│   └── /uploads            # Uploaded files
+|   └── api_call.py
+│   └──/templates
+│       ├── index.html          # Home page for file uploads
+│       └── result.html         # Result page displaying extracted details
+└── README.md               # Project documentation
 ```
 
-Your Flask application is now available at `http://localhost:3000`.
+## Contributing
 
-## One-Click Deploy
+We welcome contributions to this project. To contribute:
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=vercel-examples):
+1. **Fork the Repository**: Click the "Fork" button at the top right of this repository.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fflask3&demo-title=Flask%203%20%2B%20Vercel&demo-description=Use%20Flask%203%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2Fflask3-python-template.vercel.app%2F&demo-image=https://assets.vercel.com/image/upload/v1669994156/random/flask.png)
+2. **Create a New Branch**:
+
+    ```bash
+    git checkout -b feature/your-feature-name
+    ```
+
+3. **Commit Your Changes**:
+
+    ```bash
+    git commit -m "Add your message here"
+    ```
+
+4. **Push to the Branch**:
+
+    ```bash
+    git push origin feature/your-feature-name
+    ```
+
+5. **Submit a Pull Request**: Open a pull request to the `main` branch with a description of your changes.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For any questions or suggestions, please contact: [sahergpathan@gmail.com](mailto:sahergpathan@gmail.com)
+
