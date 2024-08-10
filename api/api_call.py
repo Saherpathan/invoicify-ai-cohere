@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template
 import pdfplumber
 import cohere
 from dotenv import load_dotenv
@@ -7,17 +7,17 @@ import json
 import re
 from PIL import Image
 from werkzeug.utils import secure_filename
+import pytesseract
 
 # Load environment variables from .env file
 load_dotenv()
 
 # Initialize Flask app
 app = Flask(__name__)
-import os
 
 # Update the upload and output folders
-app.config['UPLOAD_FOLDER'] = '/tmp/uploads'
-app.config['OUTPUT_FOLDER'] = '/tmp/output'
+app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), '../uploads')
+app.config['OUTPUT_FOLDER'] = os.path.join(os.path.dirname(__file__), '../output')
 
 # Ensure the directories exist
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
@@ -26,8 +26,7 @@ os.makedirs(app.config['OUTPUT_FOLDER'], exist_ok=True)
 # Cohere API key
 cohere_api_key = os.getenv('COHERE_API_KEY')
 
-import pytesseract
-pytesseract.pytesseract.tesseract_cmd = r"C:/Program Files/Tesseract-OCR/tesseract.exe"
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 # Function to extract text from PDF using pdfplumber
 def extract_text_from_pdf(pdf_file):
@@ -140,7 +139,6 @@ def format_json_as_text(json_data):
     )
 
     return formatted_text
-
 
 # Function to save JSON result to file
 def save_json_to_file(json_data, filename):
