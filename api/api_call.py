@@ -1,3 +1,4 @@
+import io
 from flask import Flask, request, render_template
 import pdfplumber
 import cohere
@@ -15,9 +16,13 @@ load_dotenv()
 # Initialize Flask app
 app = Flask(__name__)
 
-# Update the upload and output folders
-app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), '../uploads')
-app.config['OUTPUT_FOLDER'] = os.path.join(os.path.dirname(__file__), '../output')
+# Set up directories for file storage
+if os.getenv('ENV') == 'production':  # Assuming 'production' for Vercel
+    app.config['UPLOAD_FOLDER'] = '/tmp/uploads'
+    app.config['OUTPUT_FOLDER'] = '/tmp/output'
+else:
+    app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), '../uploads')
+    app.config['OUTPUT_FOLDER'] = os.path.join(os.path.dirname(__file__), '../output')
 
 # Ensure the directories exist
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
