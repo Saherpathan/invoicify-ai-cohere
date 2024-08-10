@@ -87,12 +87,12 @@ invoicify-ai-cohere/
 ├── vercel.json             # Vercel deployment configuration
 ├── .env                    # Environment variables 
 ├── /api                    # Main Flask application script
-│   ├── /output             # JSON outputs of extracted details
-│   └── /uploads            # Uploaded files
 |   └── api_call.py
 │   └──/templates
 │       ├── index.html          # Home page for file uploads
 │       └── result.html         # Result page displaying extracted details
+├── /output                 # JSON outputs of extracted details
+├── /uploads                # Uploaded files
 └── README.md               # Project documentation
 ```
 
