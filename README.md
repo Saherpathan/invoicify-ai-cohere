@@ -1,46 +1,46 @@
-# Invoicify-AI-Cohere
+# Invoicify-AI 🧾🚀
 
 A Flask application that extracts invoice details from uploaded PDFs and images using `pdfplumber`, `pytesseract`, and the Cohere API for natural language processing. The extracted data is displayed in a user-friendly format and can be downloaded as JSON.
 
-## Features
+## ✨ Features
 
-- **Upload PDF or Image Files**: Supports PDFs and images in PNG, JPG, JPEG formats.
-- **AI-Powered Extraction**: Utilizes Cohere API to extract invoice details such as customer information, product details, and total amount.
-- **User-Friendly Interface**: Simple and intuitive UI for uploading files and viewing results.
-- **Downloadable JSON**: Extracted data can be downloaded as a JSON file.
-- **Deployment Support**: Ready for deployment on Vercel.
+- **📂 Upload PDF or Image Files**: Supports PDFs and images in PNG, JPG, JPEG formats.
+- **🤖 AI-Powered Extraction**: Utilizes Cohere API to extract invoice details such as customer information, product details, and total amount.
+- **👌User-Friendly Interface**: Simple and intuitive UI for uploading files and viewing results.
+- **💾 Downloadable JSON**: Extracted data can be downloaded as a JSON file.
+- **🚀 Deployment Support**: Ready for deployment on Vercel.
 
-## Getting Started
+## 📋 Getting Started
 
 ### Prerequisites
 
-- Python 3.8+
-- `pip` (Python package installer)
-- [Cohere API key](https://cohere.ai/) (Add this to a `.env` file)
+- 🐍 Python 3.8+
+- 📦 `pip` (Python package installer)
+- 🔑 [Cohere API key](https://cohere.ai/) (Add this to a `.env` file)
 
 ### Installation
 
-1. **Clone the Repository**
+1. **🔗 Clone the Repository**
 
     ```bash
     git clone https://github.com/Saherpathan/invoicify-ai-cohere.git
     cd invoicify-ai-cohere
     ```
 
-2. **Create a Virtual Environment and Activate It**
+2. **🌐 Create a Virtual Environment and Activate It**
 
     ```bash
     python -m venv venv
     source venv/bin/activate   # On Windows use `venv\Scripts\activate`
     ```
 
-3. **Install the Required Dependencies**
+3. **📥 Install the Required Dependencies**
 
     ```bash
     pip install -r requirements.txt
     ```
 
-4. **Set Up Environment Variables**
+4. **🔧Set Up Environment Variables**
 
    Create a `.env` file in the root directory and add your Cohere API key:
 
@@ -48,7 +48,7 @@ A Flask application that extracts invoice details from uploaded PDFs and images 
     COHERE_API_KEY=<your_cohere_api_key>
     ```
 
-5. **Run the Flask Application Locally**
+5. **▶️ Run the Flask Application Locally**
 
     ```bash
     python api_call.py
@@ -60,13 +60,13 @@ A Flask application that extracts invoice details from uploaded PDFs and images 
 
 ### Deploying to Vercel
 
-1. **Install Vercel CLI**
+1. **🛠 Install Vercel CLI**
 
     ```bash
     npm install -g vercel
     ```
 
-2. **Deploy Your Application**
+2. **🚀Deploy Your Application**
 
     ```bash
     vercel
@@ -74,7 +74,7 @@ A Flask application that extracts invoice details from uploaded PDFs and images 
 
    Follow the prompts to deploy. Vercel will provide you with a URL where your app is live.
 
-### Environment Setup on Vercel
+### 🌐 Environment Setup on Vercel
 
 When deploying to Vercel, make sure to set the `COHERE_API_KEY` in the Environment Variables settings on the Vercel dashboard.
 
@@ -96,7 +96,7 @@ invoicify-ai-cohere/
 └── README.md               # Project documentation
 ```
 
-## Contributing
+## 🤝 Contributing
 
 We welcome contributions to this project. To contribute:
 
@@ -122,11 +122,11 @@ We welcome contributions to this project. To contribute:
 
 5. **Submit a Pull Request**: Open a pull request to the `main` branch with a description of your changes.
 
-## License
+## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Contact
+## ✉️ Contact
 
 For any questions or suggestions, please contact: [sahergpathan@gmail.com](mailto:sahergpathan@gmail.com)
 
